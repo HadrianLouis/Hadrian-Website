@@ -20,10 +20,10 @@
   --text-secondary: #CBBAB0; /* Muted warm taupe */
   --text-tertiary: #A29283; /* Muted clay - adjusted for contrast */
   
-  --accent: #B84737; /* Terracotta Vermillion */
+  --accent: #DE6B5B; /* Terracotta Vermillion */
   --accent-light: #E09043; /* Sunlit Amber */
   --accent-glow: rgba(224, 144, 67, 0.15);
-  --accent-gradient: linear-gradient(135deg, #B84737 0%, #E09043 100%);
+  --accent-gradient: linear-gradient(135deg, #DE6B5B 0%, #E09043 100%);
   
   --border-light: rgba(184, 144, 98, 0.2); /* Sand glow line */
   --border-medium: rgba(212, 175, 55, 0.25); /* Translucent gold leaf line */
@@ -74,7 +74,19 @@ body::before {
   background-position: center;
   z-index: -2;
   transform: scale(1.03);
-  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), background-image 0.8s ease-in-out;
+}
+
+body.section-resume::before {
+  background-image: url('resume_masterpiece.png');
+}
+body.state-almanacLanding::before,
+body.state-almanacPreface::before,
+body.state-almanacTOC::before {
+  background-image: url('almanac_masterpiece.png');
+}
+body.state-almanacReading::before {
+  background-image: url('reading_masterpiece.png');
 }
 
 /* Body States linked to background zooms/filters */
@@ -2121,6 +2133,16 @@ function showScreen(screenId) {
   document.body.className = '';
   document.body.classList.add('state-' + screenId);
   
+  // Restore the section classes if we are going back to portfolio
+  if (screenId === 'portfolio') {
+    const isResumeActive = document.getElementById('resumeSection').classList.contains('active');
+    if (isResumeActive) {
+      document.body.classList.add('section-resume');
+    } else {
+      document.body.classList.add('section-about');
+    }
+  }
+  
   // 1. Instantly disable pointer events and fade out old screen
   if (oldScreen) {
     oldScreen.classList.remove('active');
@@ -2171,6 +2193,15 @@ function switchSection(sectionId) {
   }
 
   showScreen('portfolio');
+
+  // Adjust background based on active section
+  if (sectionId === 'resume') {
+    document.body.classList.add('section-resume');
+    document.body.classList.remove('section-about');
+  } else {
+    document.body.classList.add('section-about');
+    document.body.classList.remove('section-resume');
+  }
 
   document.querySelectorAll('.portfolio-nav-btn').forEach(btn => {
     if(btn.getAttribute('data-section')===sectionId) {
