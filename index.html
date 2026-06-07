@@ -17,13 +17,13 @@
 :root {
   /* Color Palette - Unified Chiaroscuro (Smoked Sepia & Sunlit Amber) */
   --bg-primary: #120E0C; /* Deep espresso black fallback */
-  --bg-glass: rgba(87, 76, 66, 0.87); /* Smoked sepia glass - adjusted for perfect white-text legibility */
-  --bg-card: rgba(50, 42, 36, 0.5); /* Semi-translucent inner card backing */
+  --bg-glass: rgba(60, 52, 45, 0.58); /* Slightly more opaque tinted glass */
+  --bg-card: rgba(50, 42, 36, 0.42); /* Inner card backing */
   --bg-quote: rgba(184, 71, 55, 0.08); /* Warm terracotta wash */
   
-  --text-primary: #F5EFEB; /* Warm ivory/linen */
-  --text-secondary: #CBBAB0; /* Muted warm taupe */
-  --text-tertiary: #A29283; /* Muted clay - adjusted for contrast */
+  --text-primary: #FFFFFF; /* Pure bright white */
+  --text-secondary: #F0E8E1; /* Much brighter warm off-white for body text */
+  --text-tertiary: #D4C9C1; /* Brighter muted clay for contrast */
   
   --accent: #DE6B5B; /* Terracotta Vermillion */
   --accent-light: #E09043; /* Sunlit Amber */
@@ -141,7 +141,6 @@ body.state-almanacReading::before {
   transform: scale(1.015);
   transition: opacity var(--transition-smooth), transform var(--transition-smooth), visibility var(--transition-smooth);
   display: none;
-  overflow: hidden;
 }
 
 .art-screen.active {
@@ -154,8 +153,7 @@ body.state-almanacReading::before {
 /* Glassmorphism Panel styles */
 .glass-container {
   background: var(--bg-glass);
-  backdrop-filter: blur(10px) saturate(110%);
-  -webkit-backdrop-filter: blur(10px) saturate(110%);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
   border-radius: 20px;
@@ -255,8 +253,6 @@ body.state-almanacReading::before {
   height: var(--nav-height);
   z-index: 100;
   background: var(--bg-glass);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
@@ -748,7 +744,6 @@ body.state-almanacReading::before {
   font-size: 11.5px;
   color: var(--text-secondary);
   background: var(--bg-glass);
-  backdrop-filter: blur(10px);
   border: 1px solid var(--border-light);
   border-radius: 20px;
   cursor: pointer;
@@ -793,8 +788,6 @@ body.state-almanacReading::before {
 
 .preface-content {
   background: var(--bg-glass);
-  backdrop-filter: blur(10px) saturate(110%);
-  -webkit-backdrop-filter: blur(10px) saturate(110%);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
   border-radius: 20px;
@@ -909,7 +902,6 @@ body.state-almanacReading::before {
 
 .toc-card {
   background: var(--bg-glass);
-  backdrop-filter: blur(15px);
   border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 28px;
@@ -980,8 +972,6 @@ body.state-almanacReading::before {
   height: var(--nav-height);
   z-index: 500;
   background: var(--bg-glass);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
@@ -1038,8 +1028,6 @@ body.state-almanacReading::before {
   width: var(--sidebar-width);
   z-index: 400;
   background: var(--bg-glass);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-right: 1px solid var(--border-light);
   overflow-y: auto;
   transform: translateX(-100%);
@@ -1076,7 +1064,6 @@ body.state-almanacReading::before {
   font-size: 16px;
   color: var(--text-secondary);
   transition: all var(--transition-fast);
-  backdrop-filter: blur(10px);
 }
 
 .sidebar-toggle:hover {
@@ -1161,8 +1148,7 @@ body.state-almanacReading::before {
 
 .main-content {
   background: var(--bg-glass);
-  backdrop-filter: blur(10px) saturate(110%);
-  -webkit-backdrop-filter: blur(10px) saturate(110%);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
   border-left: 1px solid var(--border-light);
   border-right: 1px solid var(--border-light);
   color: var(--text-primary);
@@ -1298,7 +1284,6 @@ p {
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-fast);
-  backdrop-filter: blur(10px);
 }
 
 .back-to-top.visible {
