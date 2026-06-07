@@ -416,11 +416,9 @@ body.state-almanacReading::before {
 
 .portrait-frame {
   position: relative;
-  background: #EADEC9;
-  border: 1px solid rgba(184, 144, 98, 0.45);
-  padding: 12px;
-  box-shadow: var(--shadow-md);
   border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
   transition: transform var(--transition-smooth);
 }
 
@@ -432,7 +430,6 @@ body.state-almanacReading::before {
   object-fit: cover;
   filter: grayscale(25%) sepia(8%) contrast(1.02);
   transition: filter var(--transition-smooth);
-  border: 1px solid rgba(217, 160, 91, 0.15);
 }
 
 .portrait-frame:hover {
@@ -450,14 +447,14 @@ body.state-almanacReading::before {
 }
 
 .portrait-label h3 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--text-primary);
 }
 
 .portrait-label p {
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.05em;
   font-style: italic;
   color: var(--text-secondary);
@@ -1543,8 +1540,9 @@ p {
           </div>
           <div class="portrait-label">
             <h3>吕浩頔</h3>
-            <p>Hadrian Louis</p>
-            <p>Portrait of an ENTJ Scholar, 2026</p>
+            <p class="portrait-name-en">Hadrian Louis</p>
+            <p class="portrait-subtitle">非典型法学生、英专生</p>
+            <p class="portrait-info">2004-10，浙江宁波人，ENTJ-A，掌握英语（可作为工作语言）、法语（基础会话）、中文（母语，精通吴语/上海话）、粤语（学习中），热爱历史政治、地缘地理、经济金融，欧陆风云、钢铁雄心重度玩家，港、美股交易者，好为人师，爱好社会时事评论写作，热衷于模拟法庭、竞技辩论、学术观点交锋，推崇深刻观点，鄙视诡辩、歪曲事实、蹂躏逻辑者</p>
           </div>
         </div>
         
@@ -1559,10 +1557,6 @@ p {
           </div>
 
           <div class="about-details">
-            <div class="detail-col">
-              <h4>学术原力</h4>
-              <p>连续五学期专业双料第一。系统掌握英美普通法与中国法律实体规则，融合出众的法律英语文本起草与科研检索能力。</p>
-            </div>
             <div class="detail-col">
               <h4>司法实务</h4>
               <p>在最高法院国际海事司法浙江基地实习，负责撰写民事判决书，进行最新司法规范性文件研究及涉外合同、提单翻译。</p>
