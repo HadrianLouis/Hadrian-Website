@@ -1511,6 +1511,23 @@ p {
     padding: 24px;
     max-height: 75vh;
   }
+  .welcome-preface-card {
+    padding: 24px;
+    max-height: 75vh;
+    width: 92%;
+  }
+  .welcome-preface-card h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .welcome-preface-card p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .welcome-preface-card .hint-text {
+    margin-top: 20px;
+  }
   .toc-grid {
     grid-template-columns: 1fr;
   }
@@ -1549,6 +1566,8 @@ p {
 .welcome-preface-card {
   max-width: 850px;
   width: 90%;
+  max-height: 82vh;
+  overflow-y: auto;
   padding: 48px;
   background: var(--bg-glass);
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
@@ -1561,6 +1580,14 @@ p {
   line-height: 1.85;
   animation: modalSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   position: relative;
+}
+
+.welcome-preface-card::-webkit-scrollbar {
+  width: 3px;
+}
+
+.welcome-preface-card::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
 }
 
 .welcome-preface-card::after {
