@@ -154,14 +154,6 @@ body.lang-en .portfolio-nav {
   gap: 16px;
 }
 
-body.lang-en .portfolio-header .header-right {
-  margin-right: 90px;
-}
-
-body.lang-en .navbar .nav-actions {
-  margin-right: 90px;
-}
-
 body.lang-en .toc-grid {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
@@ -171,24 +163,72 @@ body.lang-en .toc-card-title {
   line-height: 1.35;
 }
 
-body.lang-en .toc-card-subtitle {
-  font-size: 12.5px;
-  line-height: 1.45;
+/* Enlarged English typography for small fonts (originally <= 13px) */
+body.lang-en p {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
-body.lang-en .toc-card-chapters {
-  font-size: 11.5px;
+body.lang-en .portrait-label p {
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  text-align: justify !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
+}
+
+body.lang-en .portrait-label .portrait-info {
+  font-size: 16px !important;
+}
+
+body.lang-en .toc-card-subtitle {
+  font-size: 14.5px;
   line-height: 1.5;
 }
 
+body.lang-en .toc-card-chapters {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
 body.lang-en .sidebar-vol {
-  font-size: 12.5px;
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 body.lang-en .sidebar-chap {
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+body.lang-en .min-timeline-date {
+  font-size: 14px;
+}
+
+body.lang-en .min-card-meta {
+  font-size: 13.5px;
+}
+
+body.lang-en .skills-tag {
+  font-size: 13.5px;
+}
+
+body.lang-en .toc-card-number {
+  font-size: 12.5px;
+}
+
+body.lang-en .strategy-reason {
+  font-size: 14px;
+}
+
+body.lang-en .strategy-body p {
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {
@@ -200,12 +240,6 @@ body.lang-en .sidebar-chap {
   }
   body.lang-en .portfolio-nav-btn {
     font-size: 11px;
-  }
-  .header-right {
-    right: 105px !important;
-  }
-  body.lang-en .navbar .nav-actions {
-    margin-right: 85px;
   }
 }
 
@@ -1596,6 +1630,26 @@ p {
 }
 
 @media (max-width: 768px) {
+  /* Hide language switcher on specific Almanac sub-pages in mobile view only */
+  #landingPage .lang-switch-container,
+  #prefacePage .lang-switch-container,
+  #tocPage .lang-switch-container,
+  #readingPage .lang-switch-container {
+    display: none !important;
+  }
+
+  /* Mobile positioning for language switcher in portfolio header */
+  .portfolio-header .lang-switch-container {
+    position: absolute !important;
+    top: 18px !important;
+    right: 72px !important;
+    margin: 0 !important;
+    z-index: 200 !important;
+  }
+  .portfolio-header .logo-wrapper {
+    gap: 8px !important;
+  }
+
   .portfolio-header {
     padding: 12px 24px;
     height: 96px;
@@ -4446,6 +4500,7 @@ function setLanguage(lang) {
   localStorage.setItem('preferredLang', lang);
   
   if (lang === 'en') {
+    document.documentElement.lang = 'en';
     document.body.classList.remove('lang-zh');
     document.body.classList.add('lang-en');
     langBtnsEn.forEach(btn => btn.classList.add('active'));
@@ -4454,6 +4509,7 @@ function setLanguage(lang) {
     volumes = volumes_en;
     mainContent.innerHTML = contentHTML_en;
   } else {
+    document.documentElement.lang = 'zh-CN';
     document.body.classList.add('lang-zh');
     document.body.classList.remove('lang-en');
     langBtnsZh.forEach(btn => btn.classList.add('active'));
