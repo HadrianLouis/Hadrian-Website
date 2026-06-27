@@ -1638,16 +1638,18 @@ p {
     display: none !important;
   }
 
-  /* Mobile positioning for language switcher in portfolio header */
+  /* Mobile positioning for language switcher in portfolio header - Left aligned to prevent overlapping Logo */
   .portfolio-header .lang-switch-container {
     position: absolute !important;
     top: 18px !important;
-    right: 72px !important;
+    left: 20px !important;
+    right: auto !important;
     margin: 0 !important;
     z-index: 200 !important;
   }
   .portfolio-header .logo-wrapper {
-    gap: 8px !important;
+    justify-content: center !important;
+    width: 100% !important;
   }
 
   .portfolio-header {
