@@ -296,6 +296,9 @@ body.state-examSystem.exam-section-politics::before {
 body.state-examSystem.exam-section-law::before {
   background-image: url('reading_masterpiece.png');
 }
+body.state-examSystem.exam-section-vocab::before {
+  background-image: url('wheatfield_masterpiece.png');
+}
 
 /* Body States linked to background zooms/filters */
 body.state-welcome::before {
@@ -3468,6 +3471,10 @@ body.lang-en .portal-modal-card.secondary-card p {
         <span class="lang-zh">考研政治看板</span>
         <span class="lang-en">Politics Analytics</span>
       </button>
+      <button class="portfolio-nav-btn exam-nav-btn" data-exam-section="vocab">
+        <span class="lang-zh">考研英语单词</span>
+        <span class="lang-en">English Vocabulary</span>
+      </button>
       <button class="portfolio-nav-btn exam-nav-btn" data-exam-section="law">
         <span class="lang-zh">法律硕士看板</span>
         <span class="lang-en">Juris Master Analytics</span>
@@ -3521,8 +3528,8 @@ body.lang-en .portal-modal-card.secondary-card p {
               <span class="lang-en">“An energy allocator rather than an abandonment list. Use facts as fuel and data as instruments—directing every marginal unit of effort toward out-of-sample validated high-return quadrants.”</span>
             </div>
 
-            <div class="career-strategy-grid" style="margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px;">
-              <!-- Card 1: Postgraduate Politics -->
+            <div class="career-strategy-grid" style="margin-top: 32px; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+              <!-- Row 1 Left: Postgraduate Politics -->
               <div class="strategy-card" onclick="switchExamSection('politics')" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(224, 144, 67, 0.35); cursor: pointer;">
                 <div>
                   <div class="strategy-header">
@@ -3550,8 +3557,40 @@ body.lang-en .portal-modal-card.secondary-card p {
                 </div>
               </div>
 
-              <!-- Card 2: Juris Master Integrated Workbench -->
-              <div class="strategy-card" onclick="switchExamSection('law')" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(224, 144, 67, 0.35); cursor: pointer;">
+              <!-- Row 1 Right: Postgraduate English Vocabulary (NEW) -->
+              <div class="strategy-card" onclick="switchExamSection('vocab')" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(224, 144, 67, 0.35); cursor: pointer;">
+                <div>
+                  <div class="strategy-header" style="justify-content: space-between;">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                      <span class="strategy-icon">📖</span>
+                      <h4>
+                        <span class="lang-zh">考研英语 &middot; 熟词僻义 / 同义替换 / 大纲词库工作台</span>
+                        <span class="lang-en">Postgraduate English &middot; Polysemy &amp; Paraphrase Workbench</span>
+                      </h4>
+                    </div>
+                    <span class="portal-sys-badge" style="padding:2px 9px; font-size:10px; letter-spacing:0.08em; flex-shrink:0;">AI 萃取连载中</span>
+                  </div>
+                  <div class="strategy-body">
+                    <p class="lang-zh">基于《词汇闪过》<strong>664 页全量转录语料</strong>与 AI 深度语义萃取，专治考研阅读与完形中的“认识单词却读不懂句子”：全量穷举<strong>「反直觉熟词僻义」</strong>（如 <code>grass: 告密</code>、<code>god/dog: 跟踪</code>、<code>goose: 推动/促进</code>）、<strong>「一词多义 × 阅读题干同义替换链」</strong>、<strong>「作者态度极性词群」</strong>与<strong>「形近易混词微距辨析」</strong>。</p>
+                    <p class="lang-en">Powered by AI extraction across 664 transcribed vocabulary pages. Targets counter-intuitive secondary meanings (e.g., <code>grass: inform on</code>, <code>goose: boost/promote</code>), reading paraphrase chains, attitude spectrums, and confusable clusters.</p>
+                    <div class="portal-module-pills" style="margin: 14px 0;">
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="event.stopPropagation(); switchExamSection('vocab', 'sec-unfamiliar')">① 反直觉熟词僻义全集</span>
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="event.stopPropagation(); switchExamSection('vocab', 'sec-paraphrase')">② 一词多义与阅读同义替换</span>
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="event.stopPropagation(); switchExamSection('vocab', 'sec-clusters')">③ 态度词/形近易混/写作升格</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid rgba(245,222,189,0.12);">
+                  <div class="strategy-reason" style="margin:0;">
+                    <span class="lang-zh">进入考研单词整理工作台（先导预告） &rarr;</span>
+                    <span class="lang-en">Open English Vocabulary Workbench &rarr;</span>
+                  </div>
+                  <a href="vocab_dashboard.html" target="_blank" onclick="event.stopPropagation()" style="color:var(--accent-light); font-size:12px; text-decoration:none; padding:4px 8px; border-radius:6px;" title="在新标签页独立打开">↗ 独立全屏窗口</a>
+                </div>
+              </div>
+
+              <!-- Row 2 Full-Width (Spans exact width of both columns above): Juris Master Integrated Workbench -->
+              <div class="strategy-card" onclick="switchExamSection('law')" style="grid-column: 1 / -1; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(224, 144, 67, 0.35); cursor: pointer;">
                 <div>
                   <div class="strategy-header">
                     <span class="strategy-icon">⚖️</span>
@@ -3616,6 +3655,24 @@ body.lang-en .portal-modal-card.secondary-card p {
           <iframe id="lawIframe" src="law_dashboard.html?embed=1" allowtransparency="true" scrolling="no" style="width:100%; min-height:3200px; border:0; display:block; background:transparent; overflow:hidden;" title="法律硕士考频与优先级一体化工作台"></iframe>
         </div>
       </section>
+
+      <!-- Exam English Vocabulary Section (NEW) -->
+      <section class="portfolio-section exam-section" id="exam-vocabSection">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px; padding:12px 22px; background:rgba(60, 52, 45, 0.72); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border-light); border-radius:16px; box-shadow:var(--shadow-md);">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span class="portal-sys-badge" style="padding:3px 10px; font-size:11px;">ENGLISH VOCAB · 664 PAGES AI EXTRACT</span>
+            <span style="font-family:var(--font-serif); font-size:18px; color:var(--text-primary); font-weight:600;">考研英语 · 熟词僻义 / 阅读同义替换 / 大纲词库工作台（先导预告与样板库）</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="nav-home-btn" onclick="switchExamSection('politics')" title="切换至考研政治考频看板">📊 政治看板</button>
+            <button class="nav-home-btn" onclick="switchExamSection('law')" title="切换至法律硕士一体化工作台">⚖️ 法硕工作台</button>
+            <a class="nav-home-btn" href="vocab_dashboard.html" target="_blank" style="text-decoration:none;" title="在新标签页全屏打开">↗ 独立全屏视图</a>
+          </div>
+        </div>
+        <div style="width:100%; background:transparent; border:none; overflow:visible;">
+          <iframe id="vocabIframe" src="vocab_dashboard.html?embed=1" allowtransparency="true" scrolling="no" style="width:100%; min-height:2200px; border:0; display:block; background:transparent; overflow:hidden;" title="考研英语词汇闪过与熟词僻义工作台"></iframe>
+        </div>
+      </section>
     </main>
   </div>
 </div>
@@ -3623,14 +3680,15 @@ body.lang-en .portal-modal-card.secondary-card p {
 <script>
 window.addEventListener('message', function(e) {
   if (!e || !e.data) return;
+  var ifrMap = { politics: 'politicsIframe', law: 'lawIframe', vocab: 'vocabIframe' };
   if (e.data.type === 'agy-iframe-height') {
-    var ifr = document.getElementById(e.data.src === 'law' ? 'lawIframe' : 'politicsIframe');
+    var ifr = document.getElementById(ifrMap[e.data.src] || 'politicsIframe');
     if (ifr && e.data.height > 300) {
       ifr.style.height = (e.data.height + 24) + 'px';
       ifr.style.minHeight = (e.data.height + 24) + 'px';
     }
   } else if (e.data.type === 'agy-iframe-scroll') {
-    var ifr2 = document.getElementById(e.data.src === 'law' ? 'lawIframe' : 'politicsIframe');
+    var ifr2 = document.getElementById(ifrMap[e.data.src] || 'politicsIframe');
     if (ifr2) {
       var rect = ifr2.getBoundingClientRect();
       window.scrollTo({ top: window.scrollY + rect.top + (e.data.top || 0) - 90, behavior: 'smooth' });
@@ -3778,7 +3836,8 @@ function showScreen(screenId) {
   } else if (screenId === 'examSystem') {
     const isPol = document.getElementById('exam-politicsSection').classList.contains('active');
     const isLaw = document.getElementById('exam-lawSection').classList.contains('active');
-    document.body.classList.add(isPol ? 'exam-section-politics' : (isLaw ? 'exam-section-law' : 'exam-section-overview'));
+    const isVocab = document.getElementById('exam-vocabSection').classList.contains('active');
+    document.body.classList.add(isPol ? 'exam-section-politics' : (isLaw ? 'exam-section-law' : (isVocab ? 'exam-section-vocab' : 'exam-section-overview')));
   }
   
   // 1. Instantly disable pointer events and fade out old screen
@@ -3904,7 +3963,7 @@ document.querySelectorAll('#mainPortfolioPage .portfolio-nav-btn').forEach(btn =
 function switchExamSection(examSectionId, subHash) {
   showScreen('examSystem');
 
-  document.body.classList.remove('exam-section-overview', 'exam-section-politics', 'exam-section-law');
+  document.body.classList.remove('exam-section-overview', 'exam-section-politics', 'exam-section-law', 'exam-section-vocab');
   document.body.classList.add('exam-section-' + examSectionId);
 
   document.querySelectorAll('#examSystemPage .exam-nav-btn').forEach(btn => {
@@ -3924,14 +3983,15 @@ function switchExamSection(examSectionId, subHash) {
     targetSec.classList.add('active');
   }
 
-  const iframeId = examSectionId === 'politics' ? 'politicsIframe' : (examSectionId === 'law' ? 'lawIframe' : null);
+  const iframeMap = { politics: 'politicsIframe', law: 'lawIframe', vocab: 'vocabIframe' };
+  const fileMap = { politics: 'politics_dashboard.html?embed=1', law: 'law_dashboard.html?embed=1', vocab: 'vocab_dashboard.html?embed=1' };
+  const iframeId = iframeMap[examSectionId] || null;
   const ifr = iframeId ? document.getElementById(iframeId) : null;
   if (ifr && ifr.contentWindow) {
     setTimeout(() => ifr.contentWindow.postMessage({ type: 'agy-ping-height' }, '*'), 50);
   }
   if (subHash && ifr) {
-    const baseFile = examSectionId === 'politics' ? 'politics_dashboard.html?embed=1' : 'law_dashboard.html?embed=1';
-    ifr.src = baseFile + '#' + subHash;
+    ifr.src = fileMap[examSectionId] + '#' + subHash;
   }
 }
 
