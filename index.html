@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HadrianLouis | 个人简历与哈德良宝典</title>
+<title>HadrianLouis | 考研资料分享与个人简历站</title>
 <!-- Preload background images to prevent lag -->
 <link rel="preload" href="wheatfield_masterpiece.png" as="image">
 <link rel="preload" href="resume_masterpiece.png" as="image">
@@ -286,17 +286,29 @@ body.state-almanacTOC::before {
 body.state-almanacReading::before {
   background-image: url('reading_masterpiece.png');
 }
+body.state-examSystem::before,
+body.state-examSystem.exam-section-overview::before {
+  background-image: url('resume_masterpiece.png');
+}
+body.state-examSystem.exam-section-politics::before {
+  background-image: url('almanac_masterpiece.png');
+}
+body.state-examSystem.exam-section-law::before {
+  background-image: url('reading_masterpiece.png');
+}
 
 /* Body States linked to background zooms/filters */
 body.state-welcome::before {
   transform: scale(1.08);
   filter: brightness(0.62) contrast(1.05) saturate(1.1);
 }
-body.state-welcome.welcome-preface-active::before {
+body.state-welcome.welcome-preface-active::before,
+body.state-welcome.system-portal-active::before {
   transform: scale(1.04);
   filter: brightness(0.78) contrast(1.03) saturate(1.1);
 }
-body.state-portfolio::before {
+body.state-portfolio::before,
+body.state-examSystem::before {
   transform: scale(1.03);
   filter: brightness(0.88) contrast(1.03) saturate(1.15);
 }
@@ -384,7 +396,8 @@ body.state-almanacReading::before {
   padding: 40px;
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-body.welcome-preface-active .landing-content {
+body.welcome-preface-active .landing-content,
+body.system-portal-active .landing-content {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-12px);
@@ -1860,6 +1873,383 @@ p {
     transform: translateY(0) scale(1);
   }
 }
+
+/* ================= DUAL SYSTEM PORTAL OVERLAY ================= */
+.system-portal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  padding: 40px 28px;
+  overflow-y: auto;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.system-portal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.portal-dual-grid {
+  display: grid;
+  grid-template-columns: 2.15fr 1fr;
+  gap: 36px;
+  max-width: 1360px;
+  width: 92%;
+  align-items: center;
+  margin: auto;
+}
+
+.portal-modal-card {
+  width: 100%;
+  max-height: 84vh;
+  overflow-y: auto;
+  background: var(--bg-glass);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  text-align: left;
+  line-height: 1.85;
+  opacity: 0;
+  animation: modalSlideIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth), background var(--transition-smooth), opacity var(--transition-smooth);
+}
+
+/* Primary Card (Left: Main Exam System - Sunlit Chiaroscuro Focus) */
+.portal-modal-card.primary-card {
+  min-height: 520px;
+  padding: 52px 50px;
+  background: linear-gradient(145deg, rgba(68, 56, 47, 0.66) 0%, rgba(48, 39, 33, 0.58) 100%);
+  border: 1px solid rgba(224, 144, 67, 0.42);
+  box-shadow: var(--shadow-lg), 0 0 45px rgba(224, 144, 67, 0.12);
+}
+
+.portal-modal-card.primary-card::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.36);
+  border-radius: 16px;
+  pointer-events: none;
+  transition: border-color var(--transition-smooth);
+}
+
+.portal-modal-card.primary-card:hover {
+  transform: translateY(-6px) scale(1.006);
+  border-color: var(--accent-light);
+  box-shadow: 0 38px 85px -12px rgba(18, 14, 12, 0.7), 0 0 36px rgba(224, 144, 67, 0.24);
+}
+
+.portal-modal-card.primary-card:hover::after {
+  border-color: rgba(224, 144, 67, 0.55);
+}
+
+/* Secondary Card (Right: Legacy Archive Sidecar - Recessed Smoked Sepia) */
+.portal-modal-card.secondary-card {
+  min-height: 370px;
+  padding: 34px 30px;
+  background: rgba(38, 32, 28, 0.40);
+  border: 1px solid rgba(184, 144, 98, 0.14);
+  box-shadow: var(--shadow-md);
+  animation: modalSlideInSecondary 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+}
+
+@keyframes modalSlideInSecondary {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 0.74;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.portal-modal-card.secondary-card::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(184, 144, 98, 0.16);
+  border-radius: 15px;
+  pointer-events: none;
+  transition: border-color var(--transition-smooth);
+}
+
+.portal-modal-card.secondary-card:hover {
+  opacity: 1 !important;
+  background: rgba(54, 45, 38, 0.56);
+  border-color: rgba(212, 175, 55, 0.35);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.portal-modal-card.secondary-card:hover::after {
+  border-color: rgba(212, 175, 55, 0.30);
+}
+
+.portal-modal-card::-webkit-scrollbar {
+  width: 3px;
+}
+
+.portal-modal-card::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+}
+
+.portal-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.portal-sys-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(224, 144, 67, 0.45);
+  background: rgba(224, 144, 67, 0.12);
+  color: var(--accent-light);
+}
+
+.portal-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  box-shadow: 0 0 8px var(--accent-light);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.portal-sys-badge.legacy-badge {
+  background: rgba(184, 144, 98, 0.06);
+  border-color: rgba(184, 144, 98, 0.18);
+  color: var(--text-tertiary);
+  font-size: 10.5px;
+  padding: 4px 12px;
+  letter-spacing: 0.15em;
+}
+
+.portal-modal-card.primary-card h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.2vw, 32px);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #FFF;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  border-bottom: 1.5px solid rgba(222, 107, 91, 0.28);
+  padding-bottom: 14px;
+  text-align: left;
+}
+
+.portal-modal-card.secondary-card h2 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(184, 144, 98, 0.16);
+  padding-bottom: 10px;
+  text-align: left;
+  transition: color var(--transition-fast);
+}
+
+.portal-modal-card.secondary-card:hover h2 {
+  color: #FFF;
+}
+
+.portal-modal-card.primary-card p {
+  font-family: var(--font-serif);
+  font-size: 17.5px;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+.portal-modal-card.secondary-card p {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  line-height: 1.72;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+.portal-modal-card .highlight {
+  font-size: 16.5px;
+  margin-bottom: 20px;
+  border-left: 3px solid var(--accent);
+  padding: 8px 14px;
+  background: rgba(222, 107, 91, 0.07);
+  border-radius: 0 8px 8px 0;
+  font-weight: 500;
+  color: var(--accent-light);
+}
+
+.portal-module-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+  margin-bottom: 8px;
+}
+
+.portal-module-pill {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 5px 14px;
+  letter-spacing: 0.04em;
+}
+
+.portal-archive-list {
+  list-style: none;
+  margin: 14px 0 8px;
+  padding: 0;
+  border-top: 1px solid rgba(184, 144, 98, 0.12);
+  padding-top: 12px;
+}
+
+.portal-archive-list li {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(184, 144, 98, 0.08);
+}
+
+.portal-archive-list li span.arch-tag {
+  font-size: 10.5px;
+  color: rgba(212, 201, 193, 0.6);
+  font-style: italic;
+}
+
+.portal-modal-card .portal-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.portal-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #FFF;
+  background: linear-gradient(135deg, rgba(222, 107, 91, 0.28) 0%, rgba(224, 144, 67, 0.22) 100%);
+  border: 1px solid rgba(224, 144, 67, 0.5);
+  padding: 10px 24px;
+  border-radius: 24px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(222, 107, 91, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.portal-modal-card.primary-card:hover .portal-primary-cta {
+  background: linear-gradient(135deg, rgba(222, 107, 91, 0.45) 0%, rgba(224, 144, 67, 0.38) 100%);
+  border-color: #FFF;
+  transform: translateX(4px);
+}
+
+.portal-secondary-cta {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+}
+
+.portal-modal-card.secondary-card:hover .portal-secondary-cta {
+  color: var(--accent-light);
+  letter-spacing: 0.15em;
+}
+
+body.lang-en .portal-modal-card.primary-card h2 {
+  letter-spacing: 0.06em;
+  font-size: clamp(21px, 2.8vw, 26px);
+  line-height: 1.35;
+}
+
+body.lang-en .portal-modal-card.secondary-card h2 {
+  letter-spacing: 0.04em;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+body.lang-en .portal-modal-card.primary-card p {
+  font-size: 15.5px;
+  line-height: 1.68;
+}
+
+body.lang-en .portal-modal-card.secondary-card p {
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+@media (max-width: 960px) {
+  .portal-dual-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 720px;
+  }
+  .portal-modal-card.primary-card {
+    min-height: auto;
+    max-height: none;
+    padding: 32px 24px;
+  }
+  .portal-modal-card.secondary-card {
+    min-height: auto;
+    max-height: none;
+    padding: 24px 20px;
+  }
+}
+
+/* Scoped exclusively to Exam Frequency Analysis (#examSystemPage) — Same RGB (60, 52, 45) as original --bg-glass, only alpha slightly raised from 0.58 to 0.72 */
+#examSystemPage .portfolio-header,
+#examSystemPage .glass-container {
+  background: rgba(60, 52, 45, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 </style>
 </head>
 <body>
@@ -1882,6 +2272,110 @@ p {
         <span class="lang-zh">开始了解我 &middot; EXPLORE</span>
         <span class="lang-en">Start to Know Me &middot; EXPLORE</span>
       </span>
+    </div>
+  </div>
+</div>
+
+<!-- Dual System Portal Selection Overlay (Asymmetric Hierarchy: Primary Exam System vs. Secondary Archive Sidecar) -->
+<div class="system-portal-overlay" id="systemPortalOverlay">
+  <div class="portal-dual-grid">
+    <!-- Left Modal: Primary / Main System (考研宝典 - ~68% Width, Sunlit Focus) -->
+    <div class="portal-modal-card primary-card" id="portalCardNew">
+      <div>
+        <div class="portal-badge-row">
+          <span class="portal-sys-badge">
+            <span class="portal-status-dot"></span>
+            <span class="lang-zh">主系统 &middot; 考研宝典</span>
+            <span class="lang-en">PRIMARY SYSTEM &middot; EXAM HUB</span>
+          </span>
+          <span style="font-family: var(--font-sans); font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.12em;">CORE WORKSPACE</span>
+        </div>
+        <h2>
+          <span class="lang-zh">考研宝典 &middot; 全科考评统计看板</span>
+          <span class="lang-en">Postgraduate Exam Almanac &amp; Analytics Hub</span>
+        </h2>
+        <p class="highlight">
+          <span class="lang-zh">“以定量数据锚定进度，以客观反馈驱动认知复利——消除备考混沌的核心数字中枢。”</span>
+          <span class="lang-en">“Anchoring progress with quantitative data, driving cognitive compounding with objective feedback.”</span>
+        </p>
+        <p class="lang-zh">这里是当前持续活跃更新的<span style="color:var(--text-primary); font-weight:600;">主系统（考研资料与考评统计看板）</span>。系统化整合考研政治与法律硕士核心科目的历年真题测评、模拟套卷得分追踪、高频考点掌握度矩阵以及错题归因复盘。</p>
+        <p class="lang-en">This is the actively maintained <span style="color:var(--text-primary); font-weight:600;">Primary System (Postgraduate Exam Repository &amp; Evaluation Analytics Dashboard)</span>, integrating past-paper assessments, mock exam score tracking, syllabus mastery matrices, and error attribution across Postgraduate Politics and Juris Master subjects.</p>
+        <div class="portal-module-pills">
+          <span class="portal-module-pill">
+            <span class="lang-zh">📊 考研政治五科看板</span>
+            <span class="lang-en">📊 Politics 5-Module Analytics</span>
+          </span>
+          <span class="portal-module-pill">
+            <span class="lang-zh">⚖️ 法硕基础课（刑法 / 民法）</span>
+            <span class="lang-en">⚖️ JM Foundation (Criminal / Civil)</span>
+          </span>
+          <span class="portal-module-pill">
+            <span class="lang-zh">🏛️ 法硕综合课（法理 / 宪法 / 法制史）</span>
+            <span class="lang-en">🏛️ JM Comprehensive</span>
+          </span>
+          <span class="portal-module-pill">
+            <span class="lang-zh">📈 模考曲线与错题归因</span>
+            <span class="lang-en">📈 Mock Trends &amp; Error Attribution</span>
+          </span>
+        </div>
+      </div>
+      <div class="portal-footer">
+        <span style="font-family: var(--font-sans); font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.06em;">
+          <span class="lang-zh">当前主入口 &middot; 推荐使用桌面端访问</span>
+          <span class="lang-en">Primary Entry &middot; Desktop Recommended</span>
+        </span>
+        <div class="portal-primary-cta">
+          <span class="lang-zh">进入考研宝典系统 &rarr;</span>
+          <span class="lang-en">Enter Exam System &rarr;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Modal: Secondary / Legacy System Sidecar (个人简历 - ~32% Width, Recessed Sepia) -->
+    <div class="portal-modal-card secondary-card" id="portalCardOld">
+      <div>
+        <div class="portal-badge-row">
+          <span class="portal-sys-badge legacy-badge">
+            <span class="lang-zh">旧系统 &middot; 辅助入口</span>
+            <span class="lang-en">LEGACY &middot; ARCHIVE</span>
+          </span>
+        </div>
+        <h2>
+          <span class="lang-zh">个人简历与哈德良宝典</span>
+          <span class="lang-en">Resume &amp; Hadrian's Almanac</span>
+        </h2>
+        <p class="lang-zh">笔者之前为了申请保研夏令营而构建的个人简历展示页和十万字原创社会评论文集，仅作为原先网站的主体内容完整封存保留。</p>
+        <p class="lang-en">Personal resume and 100,000-word original social commentary essays created during postgraduate summer camp applications, fully archived and preserved as the original core content of this site.</p>
+        <ul class="portal-archive-list">
+          <li>
+            <span>
+              <span class="lang-zh">01 &middot; 关于我与个人画像</span>
+              <span class="lang-en">01 &middot; About Me &amp; Profile</span>
+            </span>
+            <span class="arch-tag">Profile</span>
+          </li>
+          <li>
+            <span>
+              <span class="lang-zh">02 &middot; 履历详情与个人战略</span>
+              <span class="lang-en">02 &middot; Resume &amp; Strategy</span>
+            </span>
+            <span class="arch-tag">CV</span>
+          </li>
+          <li>
+            <span>
+              <span class="lang-zh">03 &middot; 《哈德良宝典》十一卷</span>
+              <span class="lang-en">03 &middot; Almanac (11 Vols)</span>
+            </span>
+            <span class="arch-tag">Reader</span>
+          </li>
+        </ul>
+      </div>
+      <div class="portal-footer" style="margin-top: 16px; padding-top: 14px;">
+        <div class="portal-secondary-cta">
+          <span class="lang-zh">查阅旧系统档案 (前言) &rarr;</span>
+          <span class="lang-en">View Legacy Archive &rarr;</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1982,8 +2476,8 @@ p {
                   <span class="lang-en">An Atypical Common Law Aspirant and Applied Linguistics Scholar</span>
                 </p>
                 <p class="portrait-info">
-                  <span class="lang-zh">2004-10，浙江宁波人，ENTJ-A，掌握英语（可作为工作语言）、法语（基础会话）、中文（母语，精通吴语/上海话）、粤语（学习中），热爱历史政治、地缘地理、经济金融，欧陆风云、钢铁雄心重度玩家，热衷表达，爱好社会时事评论写作，热衷于模拟法庭、竞技辩论、学术观点交锋，推崇深刻观点，鄙视诡辩、歪曲事实、蹂躏逻辑者</span>
-                  <span class="lang-en">Born October 2004 in Ningbo, Zhejiang. ENTJ-A. Multilingual: English (proficient working language), French (basic conversational), Mandarin Chinese (native), Wu Dialect /Shanghainese (fluent), Cantonese (learning). Passionate about history, political economy, geopolitics, and global finance. Active equities trader in US and Hong Kong markets. Hardcore player of grand strategy games (Europa Universalis, Hearts of Iron). An articulate advocate with a deep passion for current affairs commentary, moot court, competitive debate, and academic disputation. Values intellectual depth; rejects sophistry, factual distortion, and logical fallacies.</span>
+                  <span class="lang-zh">2004-10，浙江宁波人，ENTJ-A，掌握英语（可作为工作语言）、法语（基础会话）、中文（母语，精通吴语/上海话）、粤语（学习中），喜登山、户外，热爱历史政治、地缘地理、经济金融，欧陆风云、钢铁雄心重度玩家，热衷表达，爱好社会时事评论写作，热衷于模拟法庭、竞技辩论、学术观点交锋，推崇深刻观点，鄙视诡辩、歪曲事实、蹂躏逻辑者</span>
+                  <span class="lang-en">Born October 2004 in Ningbo, Zhejiang. ENTJ-A. Multilingual: English (proficient working language), French (basic conversational), Mandarin Chinese (native), Wu Dialect /Shanghainese (fluent), Cantonese (learning). Enjoys hiking and outdoors. Passionate about history, political economy, geopolitics, and global finance. Active equities trader in US and Hong Kong markets. Hardcore player of grand strategy games (Europa Universalis, Hearts of Iron). An articulate advocate with a deep passion for current affairs commentary, moot court, competitive debate, and academic disputation. Values intellectual depth; rejects sophistry, factual distortion, and logical fallacies.</span>
                 </p>
               </div>
             </div>
@@ -1997,8 +2491,8 @@ p {
               <p class="lang-zh">你好，我是 HadrianLyu 吕浩頔。我目前就读于兰州理工大学外国语学院，学业与综合排名连续五个学期位列专业双第一，GPA 达到 4.1/5（平均分 90.74）。我曾被公费选派至新加坡国立大学法学院（NUS Law）的普通法项目，系统研读英美普通法教义并掌握其推理方法。我有着优秀的双语功底与较为坚实的法学理论素养，在最高人民法院国际海事司法浙江基地实习中深得法官认可，曾独立撰写多份民事判决书并起草高级法官会议与内部领学报告。</p>
               <p class="lang-en">Hello, I am Hadrian Louis (HadrianLyu / Lyu Haodi). I am currently pursuing my undergraduate studies at Lanzhou University of Technology, majoring in English (Intellectual Property Law Direction), where I rank 1st out of my cohort both academically and comprehensively (GPA: 4.1/5.0; Weighted Average: 90.74/100). I was awarded a government scholarship to attend the Common Law Program at the National University of Singapore (NUS Law), where I systematically studied common law doctrines and developed rigorous legal reasoning skills. Combining a strong bilingual command with a solid foundation in jurisprudence, I served as a Judicial Extern in the Commercial Division of the Ningbo Maritime Court (SPC International Maritime Judicial Center). During this tenure, I earned high recognition from presiding judges for independently drafting judicial opinions and authoring comprehensive research briefs and reports for judicial panels.</p>
               
-              <p class="lang-zh">我是一个出厂设置非常鲜明的 ENTJ 人格：崇尚理性与第一性原理，习惯以直觉寻找灵感，并在事后用极度严密的逻辑链条去反推验证。我崇尚减熵与长期主义，认为“可以犯错，决不自欺”是维持个人成长复利的根本途径。未来，我将矢志投身于涉外法治领域，尤其是跨境商事争议解决、商业航天、太空航运争议解决等全新的专业赛道，用一生的时间在国际法律舞台上捍卫契约精神。</p>
-              <p class="lang-en">I operate on a distinct ENTJ mindset: I highly value rationality and first principles, customarily seek intuition for initial insights, and subsequently apply rigorous logical chains to reverse-verify and validate. I advocate for entropy reduction and long-termism, believing that "intellectual honesty—the refusal to engage in self-deception—is the ultimate engine of cognitive compounding." In the future, I am dedicated to pursuing a career in transnational dispute resolution, particularly in emerging professional fields such as cross-border commercial arbitration, maritime disputes, and the emerging field of commercial space logistics and space law.</p>
+              <p class="lang-zh">我是一个出厂设置非常鲜明的 ENTJ人：崇尚理性与第一性原理，习惯以直觉寻找灵感，并在事后用极度严密的逻辑链条去反推验证。我崇尚减熵与长期主义，认为“可以犯错，决不自欺”是维持个人成长复利的根本途径。未来，我将矢志投身于涉外法治领域，专注于跨境商事争议解决、反不正当竞争法、知识产权等全新的专业赛道，希望此刻驻足的优秀的你正是我以后的同行。</p>
+              <p class="lang-en">I operate on a distinct ENTJ mindset: I highly value rationality and first principles, customarily seek intuition for initial insights, and subsequently apply rigorous logical chains to reverse-verify and validate. I advocate for entropy reduction and long-termism, believing that "intellectual honesty—the refusal to engage in self-deception—is the ultimate engine of cognitive compounding." In the future, I am dedicated to pursuing a career in transnational legal practice, focusing on emerging fields such as cross-border commercial dispute resolution, antitrust &amp; unfair competition law, and intellectual property. I sincerely hope that you, lingering here at this moment, will be a future colleague of mine.</p>
               
               <div class="about-quote">
                 <span class="lang-zh">“永远要避免的就是自己骗自己。承认混沌是重启的唯一前提，推翻自己是认知复利的终极引擎。”</span>
@@ -2019,8 +2513,8 @@ p {
                     <span class="lang-zh">求索之径</span>
                     <span class="lang-en">Quest Path</span>
                   </h4>
-                  <p class="lang-zh">锁定PKU·STL双法系训练，立志通过顶尖 Moot 竞赛，以无可辩驳的竞技成绩克服高端法律市场信任成本。</p>
-                  <p class="lang-en">Targeting the dual-system training of Peking University School of Transnational Law (STL). Committed to overcoming the trust cost in the high-end legal market with irrefutable competitive achievements through top-tier Moot Court competitions.</p>
+                  <p class="lang-zh">锁定JD双法系训练，立志通过顶尖 Moot+实习 ，为自己降低高端市场的信任成本。</p>
+                  <p class="lang-en">Targeting JD dual-system legal training. Committed to lowering the trust cost in the high-end legal market through top-tier Moot competitions and prime internships.</p>
                 </div>
               </div>
             </div>
@@ -2114,8 +2608,8 @@ p {
                       <span class="lang-en">Fenghua Senior High School</span>
                     </span>
                     <span class="min-timeline-sub">
-                      <span class="lang-zh">政史地专业组</span>
-                      <span class="lang-en">Politics, History, and Geography Specialty Group</span>
+                      <span class="lang-zh">政史地专业组 · 政治单科状元</span>
+                      <span class="lang-en">Politics, History, and Geography Specialty Group &middot; Top Scorer in Politics</span>
                     </span>
                   </div>
                   <div class="min-timeline-date">2020.09 — 2023.06</div>
@@ -2830,7 +3324,195 @@ p {
   </div>
 </div>
 
+<!-- 4. New Postgraduate Exam System Hub (Parallel Architecture) -->
+<div class="art-screen" id="examSystemPage">
+  <header class="portfolio-header">
+    <div class="logo-wrapper" style="display: flex; align-items: center; gap: 20px;">
+      <div class="logo">Hadrian<span>Louis</span></div>
+      <div class="lang-switch-container">
+        <button class="lang-switch-btn active lang-btn-zh">ZH</button>
+        <div class="lang-switch-divider"></div>
+        <button class="lang-switch-btn lang-btn-en">EN</button>
+      </div>
+    </div>
+    <nav class="portfolio-nav">
+      <button class="portfolio-nav-btn exam-nav-btn active" data-exam-section="overview">
+        <span class="lang-zh">考研宝典总览</span>
+        <span class="lang-en">Exam Hub Overview</span>
+      </button>
+      <button class="portfolio-nav-btn exam-nav-btn" data-exam-section="politics">
+        <span class="lang-zh">考研政治看板</span>
+        <span class="lang-en">Politics Analytics</span>
+      </button>
+      <button class="portfolio-nav-btn exam-nav-btn" data-exam-section="law">
+        <span class="lang-zh">法律硕士看板</span>
+        <span class="lang-en">Juris Master Analytics</span>
+      </button>
+    </nav>
+    <div class="header-right" style="gap: 10px;">
+      <span class="esc-hint">
+        <span class="lang-zh">按 Esc 返回</span>
+        <span class="lang-en">Press Esc to Return</span>
+      </span>
+      <button class="nav-home-btn" onclick="openSystemPortal()" title="返回双系统分流入口">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
+        <span>
+          <span class="lang-zh">分流入口</span>
+          <span class="lang-en">Portal</span>
+        </span>
+      </button>
+      <button class="nav-home-btn" onclick="showScreen('welcome')" title="返回初始封面页">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>
+          <span class="lang-zh">封面</span>
+          <span class="lang-en">Cover</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <div class="portfolio-scroll-wrapper">
+    <main class="portfolio-main" style="max-width: 1480px;">
+      <!-- Exam Overview Section -->
+      <section class="portfolio-section exam-section active" id="exam-overviewSection">
+        <div class="glass-container">
+          <div class="about-text">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:8px;">
+              <h2>
+                <span class="lang-zh">考研宝典 &middot; 全科考评与优先级工作台总览</span>
+                <span class="lang-en">Postgraduate Exam Almanac &amp; Analytics Command Center</span>
+              </h2>
+              <span class="portal-sys-badge">
+                <span class="portal-status-dot"></span>
+                <span class="lang-zh">主系统 &middot; 双核数据已上线</span>
+                <span class="lang-en">PRIMARY SYSTEM &middot; LIVE DATA</span>
+              </span>
+            </div>
+            <div class="title-line"></div>
+            <p class="lang-zh">欢迎进入<strong>考研资料与考评统计看板系统（主系统）</strong>。本系统已全量接入<strong>考研政治（1994–2026 · 42 份真题 · 88 专题双轴模型）</strong>与<strong>法律硕士（2003–2026 · 3,568 题映射库 · 1,587 背诵本单元 × 1,472 知识点分轴优先级 × 法综五年考向实证）</strong>，为你提供从宏观考频洞察到每日背诵排期的定量决策支持。</p>
+            <p class="lang-en">Welcome to the <strong>Postgraduate Exam Evaluation &amp; Priority Workbench (Primary System)</strong>. Powered by 33 years of Postgraduate Politics corpus data (88 frozen topics) and 3,568 Juris Master past-exam mappings (1,587 recitation units &times; 1,472 dual-axis priority points &times; 5-year synthesis trends).</p>
+
+            <div class="about-quote">
+              <span class="lang-zh">“这是一台精力分配器，不是押题放弃清单。把事实当燃料，把数据当工具——让备考的每一份边际精力都投向经样本外验证的高回报象限。”</span>
+              <span class="lang-en">“An energy allocator rather than an abandonment list. Use facts as fuel and data as instruments—directing every marginal unit of effort toward out-of-sample validated high-return quadrants.”</span>
+            </div>
+
+            <div class="career-strategy-grid" style="margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px;">
+              <!-- Card 1: Postgraduate Politics -->
+              <div class="strategy-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(224, 144, 67, 0.35);">
+                <div>
+                  <div class="strategy-header" style="cursor: pointer;" onclick="switchExamSection('politics')">
+                    <span class="strategy-icon">📊</span>
+                    <h4>
+                      <span class="lang-zh">考研政治 &middot; 考频与双轴优先级看板 (1994–2026)</span>
+                      <span class="lang-en">Postgraduate Politics &middot; Dual-Axis Frequency Dashboard</span>
+                    </h4>
+                  </div>
+                  <div class="strategy-body">
+                    <p class="lang-zh">覆盖 <strong>1994–2026 共 42 份历年真题、1,497 道语料题目、88 个冻结专题</strong>（升级口径 <code>stats-v2 + sweet-spot-v2</code>）。首屏呈现<strong>「甜点位 · 超额覆盖曲线」</strong>与<strong>「十格策略矩阵（5科×客/主双轴）」</strong>，并将分科复习方略与 88 专题优先级融为单一联动工作台。</p>
+                    <p class="lang-en">Covers 42 past papers (1994–2026), 1,497 questions, and 88 frozen topics (<code>stats-v2</code>). Features the Sweet-Spot Excess Coverage Curve, 10-Cell Strategy Matrix, and a unified non-duplicative Topic &amp; Playbook Workbench.</p>
+                    <div class="portal-module-pills" style="margin: 14px 0;">
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="switchExamSection('politics', 'sec-sweet')">① ★ 甜点位曲线与十格策略表</span>
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="switchExamSection('politics', 'sec-workbench')">② 88专题优先级与分科方略合一工作台</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid rgba(245,222,189,0.12);">
+                  <div class="strategy-reason" style="margin:0; cursor:pointer;" onclick="switchExamSection('politics')">
+                    <span class="lang-zh">进入政治考频看板 &rarr;</span>
+                    <span class="lang-en">Open Politics Dashboard &rarr;</span>
+                  </div>
+                  <a href="politics_dashboard.html" target="_blank" style="color:var(--accent-light); font-size:12px; text-decoration:none;">↗ 独立全屏窗口</a>
+                </div>
+              </div>
+
+              <!-- Card 2: Juris Master Integrated Workbench -->
+              <div class="strategy-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(224, 144, 67, 0.35);">
+                <div>
+                  <div class="strategy-header" style="cursor: pointer;" onclick="switchExamSection('law')">
+                    <span class="strategy-icon">⚖️</span>
+                    <h4>
+                      <span class="lang-zh">法律硕士 &middot; 甜点位曲线 / 十格方略 / 知识点优先级合一工作台</span>
+                      <span class="lang-en">Juris Master &middot; Integrated Sweet-Spot &amp; Priority Workbench</span>
+                    </h4>
+                  </div>
+                  <div class="strategy-body">
+                    <p class="lang-zh">深度整合：首屏直观呈现<strong>「五科甜点位超额覆盖曲线」</strong>与<strong>「十格策略矩阵（5科×2轴）」</strong>；下方将<strong>分科目复习方略</strong>与<strong>1,472 大纲考点 × 《27背诵一本通》书标库</strong>合并为唯一联动总表（零重复罗列），并附<strong>法综 2022–2026 五年考向实证</strong>。</p>
+                    <p class="lang-en">Deep integration of the 5-Subject Sweet-Spot Excess Coverage Curve, 10-Cell Strategy Matrix, unified 1,472-point &amp; Recitation Book-Tag Workbench (zero duplicate tables), and 2022–2026 Synthesis Matrix.</p>
+                    <div class="portal-module-pills" style="margin: 14px 0;">
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="switchExamSection('law', 'sec-sweet')">① ★ 甜点位曲线与十格策略表</span>
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="switchExamSection('law', 'sec-workbench')">② 1,472考点优先级与分科方略合一工作台</span>
+                      <span class="portal-module-pill" style="cursor:pointer;" onclick="switchExamSection('law', 'sec-kx')">③ 法综考向五年实证 (2022–2026)</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid rgba(245,222,189,0.12);">
+                  <div class="strategy-reason" style="margin:0; cursor:pointer;" onclick="switchExamSection('law')">
+                    <span class="lang-zh">进入法硕一体化工作台 &rarr;</span>
+                    <span class="lang-en">Open Juris Master Workbench &rarr;</span>
+                  </div>
+                  <a href="law_dashboard.html" target="_blank" style="color:var(--accent-light); font-size:12px; text-decoration:none;">↗ 独立全屏窗口</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exam Politics Dashboard Section -->
+      <section class="portfolio-section exam-section" id="exam-politicsSection">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px; padding:12px 22px; background:rgba(60, 52, 45, 0.72); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border-light); border-radius:16px; box-shadow:var(--shadow-md);">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span class="portal-sys-badge" style="padding:3px 10px; font-size:11px;">POLITICS · 1994–2026</span>
+            <span style="font-family:var(--font-serif); font-size:18px; color:var(--text-primary); font-weight:600;">考研政治 · 考频与双轴优先级看板</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="nav-home-btn" onclick="switchExamSection('law')" title="切换至法律硕士一体化工作台">⚖️ 切换至法硕工作台</button>
+            <a class="nav-home-btn" href="politics_dashboard.html" target="_blank" style="text-decoration:none;" title="在新标签页全屏打开">↗ 独立全屏视图</a>
+          </div>
+        </div>
+        <div style="width:100%; background:transparent; border:none; overflow:visible;">
+          <iframe id="politicsIframe" src="politics_dashboard.html?embed=1" allowtransparency="true" scrolling="no" style="width:100%; min-height:2800px; border:0; display:block; background:transparent; overflow:hidden;" title="考研政治考频分析看板"></iframe>
+        </div>
+      </section>
+
+      <!-- Exam Law Workbench Section -->
+      <section class="portfolio-section exam-section" id="exam-lawSection">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px; padding:12px 22px; background:rgba(60, 52, 45, 0.72); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border-light); border-radius:16px; box-shadow:var(--shadow-md);">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span class="portal-sys-badge" style="padding:3px 10px; font-size:11px;">JURIS MASTER · V27 INTEGRATED</span>
+            <span style="font-family:var(--font-serif); font-size:18px; color:var(--text-primary); font-weight:600;">法律硕士 · 考频总表 / 分轴优先级 / 法综考向一体化工作台</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="nav-home-btn" onclick="switchExamSection('politics')" title="切换至考研政治考频看板">📊 切换至政治看板</button>
+            <a class="nav-home-btn" href="law_dashboard.html" target="_blank" style="text-decoration:none;" title="在新标签页全屏打开">↗ 独立全屏视图</a>
+          </div>
+        </div>
+        <div style="width:100%; background:transparent; border:none; overflow:visible;">
+          <iframe id="lawIframe" src="law_dashboard.html?embed=1" allowtransparency="true" scrolling="no" style="width:100%; min-height:3200px; border:0; display:block; background:transparent; overflow:hidden;" title="法律硕士考频与优先级一体化工作台"></iframe>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
 <script>
+window.addEventListener('message', function(e) {
+  if (!e || !e.data) return;
+  if (e.data.type === 'agy-iframe-height') {
+    var ifr = document.getElementById(e.data.src === 'law' ? 'lawIframe' : 'politicsIframe');
+    if (ifr && e.data.height > 300) {
+      ifr.style.height = (e.data.height + 24) + 'px';
+      ifr.style.minHeight = (e.data.height + 24) + 'px';
+    }
+  } else if (e.data.type === 'agy-iframe-scroll') {
+    var ifr2 = document.getElementById(e.data.src === 'law' ? 'lawIframe' : 'politicsIframe');
+    if (ifr2) {
+      var rect = ifr2.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + rect.top + (e.data.top || 0) - 90, behavior: 'smooth' });
+    }
+  }
+});
 // ================= DATA =================
 const volumes_zh=[
 {id:"vol0",title:"序卷",subtitle:"锤与道 —— 我的认知操作系统",chapters:[
@@ -2914,6 +3596,7 @@ const readingScrollArea=document.getElementById('readingScrollArea');
 const screens = {
   welcome: document.getElementById('siteLandingPage'),
   portfolio: document.getElementById('mainPortfolioPage'),
+  examSystem: document.getElementById('examSystemPage'),
   almanacLanding: document.getElementById('landingPage'),
   almanacPreface: document.getElementById('prefacePage'),
   almanacTOC: document.getElementById('tocPage'),
@@ -2928,7 +3611,18 @@ let isNavigatingBack = false;
 document.body.classList.add('state-welcome');
 
 function showScreen(screenId) {
-  if (currentScreenId === screenId) return;
+  const systemPortalOverlay = document.getElementById('systemPortalOverlay');
+  const welcomePrefaceOverlay = document.getElementById('welcomePrefaceOverlay');
+
+  // If explicitly returning to welcome cover while already on welcome, reset overlays
+  if (currentScreenId === screenId) {
+    if (screenId === 'welcome') {
+      if (systemPortalOverlay) systemPortalOverlay.classList.remove('active');
+      if (welcomePrefaceOverlay) welcomePrefaceOverlay.classList.remove('active');
+      document.body.classList.remove('system-portal-active', 'welcome-preface-active');
+    }
+    return;
+  }
   
   if (!isNavigatingBack) {
     if (screenHistory.length === 0 || screenHistory[screenHistory.length - 1] !== currentScreenId) {
@@ -2940,6 +3634,9 @@ function showScreen(screenId) {
   const newScreen = screens[screenId];
   
   if (!newScreen) return;
+
+  if (systemPortalOverlay) systemPortalOverlay.classList.remove('active');
+  if (welcomePrefaceOverlay) welcomePrefaceOverlay.classList.remove('active');
   
   // Update body background state for Impressionist zoom/filter effects
   const isEn = document.body.classList.contains('lang-en');
@@ -2954,6 +3651,10 @@ function showScreen(screenId) {
     } else {
       document.body.classList.add('section-about');
     }
+  } else if (screenId === 'examSystem') {
+    const isPol = document.getElementById('exam-politicsSection').classList.contains('active');
+    const isLaw = document.getElementById('exam-lawSection').classList.contains('active');
+    document.body.classList.add(isPol ? 'exam-section-politics' : (isLaw ? 'exam-section-law' : 'exam-section-overview'));
   }
   
   // 1. Instantly disable pointer events and fade out old screen
@@ -2970,7 +3671,7 @@ function showScreen(screenId) {
   }
   
   // 2. Determine display type for the new screen
-  const isFlex = screenId === 'welcome' || screenId === 'almanacLanding' || screenId === 'almanacPreface' || screenId === 'portfolio';
+  const isFlex = screenId === 'welcome' || screenId === 'almanacLanding' || screenId === 'almanacPreface' || screenId === 'portfolio' || screenId === 'examSystem';
   newScreen.style.display = isFlex ? 'flex' : 'block';
   
   // Force reflow
@@ -2983,30 +3684,57 @@ function showScreen(screenId) {
   currentScreenId = screenId;
 }
 
+function openSystemPortal() {
+  if (currentScreenId !== 'welcome') {
+    showScreen('welcome');
+  }
+  const welcomePrefaceOverlay = document.getElementById('welcomePrefaceOverlay');
+  if (welcomePrefaceOverlay) {
+    welcomePrefaceOverlay.classList.remove('active');
+  }
+  document.body.classList.remove('welcome-preface-active');
+  const systemPortalOverlay = document.getElementById('systemPortalOverlay');
+  if (systemPortalOverlay) {
+    systemPortalOverlay.classList.add('active');
+    document.body.classList.add('system-portal-active');
+  }
+}
+
 function goBack() {
   if (screenHistory.length > 0) {
     const prevScreen = screenHistory.pop();
     isNavigatingBack = true;
     showScreen(prevScreen);
     isNavigatingBack = false;
+    if (prevScreen === 'welcome') {
+      openSystemPortal();
+    }
   }
 }
 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     const welcomePrefaceOverlay = document.getElementById('welcomePrefaceOverlay');
+    const systemPortalOverlay = document.getElementById('systemPortalOverlay');
     if (welcomePrefaceOverlay && welcomePrefaceOverlay.classList.contains('active')) {
       welcomePrefaceOverlay.classList.remove('active');
       document.body.classList.remove('welcome-preface-active');
-      showScreen('portfolio');
-      switchSection('about');
+      if (systemPortalOverlay) {
+        systemPortalOverlay.classList.add('active');
+        document.body.classList.add('system-portal-active');
+      }
+      return;
+    }
+    if (systemPortalOverlay && systemPortalOverlay.classList.contains('active')) {
+      systemPortalOverlay.classList.remove('active');
+      document.body.classList.remove('system-portal-active');
       return;
     }
     goBack();
   }
 });
 
-// ================= SECTION NAVIGATION =================
+// ================= SECTION NAVIGATION (LEGACY PORTFOLIO) =================
 function switchSection(sectionId) {
   if(sectionId==='almanac') {
     enterAlmanacFlow();
@@ -3024,7 +3752,7 @@ function switchSection(sectionId) {
     document.body.classList.remove('section-resume');
   }
 
-  document.querySelectorAll('.portfolio-nav-btn').forEach(btn => {
+  document.querySelectorAll('#mainPortfolioPage .portfolio-nav-btn').forEach(btn => {
     if(btn.getAttribute('data-section')===sectionId) {
       btn.classList.add('active');
     } else {
@@ -3032,7 +3760,7 @@ function switchSection(sectionId) {
     }
   });
 
-  document.querySelectorAll('.portfolio-section').forEach(sec => {
+  document.querySelectorAll('#mainPortfolioPage .portfolio-section').forEach(sec => {
     sec.classList.remove('active');
   });
 
@@ -3042,9 +3770,50 @@ function switchSection(sectionId) {
   }
 }
 
-document.querySelectorAll('.portfolio-nav-btn').forEach(btn => {
+document.querySelectorAll('#mainPortfolioPage .portfolio-nav-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     switchSection(btn.getAttribute('data-section'));
+  });
+});
+
+// ================= NEW EXAM SYSTEM NAVIGATION =================
+function switchExamSection(examSectionId, subHash) {
+  showScreen('examSystem');
+
+  document.body.classList.remove('exam-section-overview', 'exam-section-politics', 'exam-section-law');
+  document.body.classList.add('exam-section-' + examSectionId);
+
+  document.querySelectorAll('#examSystemPage .exam-nav-btn').forEach(btn => {
+    if (btn.getAttribute('data-exam-section') === examSectionId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  document.querySelectorAll('#examSystemPage .exam-section').forEach(sec => {
+    sec.classList.remove('active');
+  });
+
+  const targetSec = document.getElementById('exam-' + examSectionId + 'Section');
+  if (targetSec) {
+    targetSec.classList.add('active');
+  }
+
+  const iframeId = examSectionId === 'politics' ? 'politicsIframe' : (examSectionId === 'law' ? 'lawIframe' : null);
+  const ifr = iframeId ? document.getElementById(iframeId) : null;
+  if (ifr && ifr.contentWindow) {
+    setTimeout(() => ifr.contentWindow.postMessage({ type: 'agy-ping-height' }, '*'), 50);
+  }
+  if (subHash && ifr) {
+    const baseFile = examSectionId === 'politics' ? 'politics_dashboard.html?embed=1' : 'law_dashboard.html?embed=1';
+    ifr.src = baseFile + '#' + subHash;
+  }
+}
+
+document.querySelectorAll('#examSystemPage .exam-nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    switchExamSection(btn.getAttribute('data-exam-section'));
   });
 });
 
@@ -3074,24 +3843,58 @@ document.querySelectorAll('.resume-menu-btn').forEach(btn => {
   });
 });
 
-// ================= ALMANAC INTERACTIVE FLOW =================
+// ================= PORTAL & ALMANAC INTERACTIVE FLOW =================
 let sidebarOpen=false;
 
-// Welcome Landing -> Show Welcome Preface Overlay
+// 1. Welcome Landing Cover -> Show Dual System Portal Overlay
 siteLandingPage.addEventListener('click',(e)=>{
   e.stopPropagation();
-  const overlay = document.getElementById('welcomePrefaceOverlay');
-  if (overlay) {
-    overlay.classList.add('active');
-    document.body.classList.add('welcome-preface-active');
-  } else {
-    showScreen('portfolio');
-    switchSection('about');
-  }
+  openSystemPortal();
 });
 
-// Welcome Preface Overlay -> Portfolio Hub
+const systemPortalOverlay = document.getElementById('systemPortalOverlay');
+const portalCardNew = document.getElementById('portalCardNew');
+const portalCardOld = document.getElementById('portalCardOld');
 const welcomePrefaceOverlay = document.getElementById('welcomePrefaceOverlay');
+
+// Clicking outside the cards on the portal overlay returns to Welcome Cover
+if (systemPortalOverlay) {
+  systemPortalOverlay.addEventListener('click', (e) => {
+    if (e.target === systemPortalOverlay) {
+      systemPortalOverlay.classList.remove('active');
+      document.body.classList.remove('system-portal-active');
+    }
+  });
+}
+
+// 2(a). Left Portal Card (New System: 考研宝典) -> Enter Exam System Hub
+if (portalCardNew) {
+  portalCardNew.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (systemPortalOverlay) systemPortalOverlay.classList.remove('active');
+    document.body.classList.remove('system-portal-active');
+    showScreen('examSystem');
+    switchExamSection('overview');
+  });
+}
+
+// 2(b). Right Portal Card (Old System: 个人简历) -> Show Legacy Welcome Preface Overlay
+if (portalCardOld) {
+  portalCardOld.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (systemPortalOverlay) systemPortalOverlay.classList.remove('active');
+    document.body.classList.remove('system-portal-active');
+    if (welcomePrefaceOverlay) {
+      welcomePrefaceOverlay.classList.add('active');
+      document.body.classList.add('welcome-preface-active');
+    } else {
+      showScreen('portfolio');
+      switchSection('about');
+    }
+  });
+}
+
+// 3. Legacy Welcome Preface Overlay -> Legacy Portfolio Hub (Unchanged)
 if (welcomePrefaceOverlay) {
   welcomePrefaceOverlay.addEventListener('click',(e)=>{
     e.stopPropagation();
