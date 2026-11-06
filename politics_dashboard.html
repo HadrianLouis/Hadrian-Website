@@ -636,6 +636,41 @@ tbody tr:hover td { background: rgba(255, 255, 255, 0.06); }
   }
 }
 
+
+/* ==== MOBILE UI TUNE (<=768px) — appended; CSS only, no content/PC change ==== */
+@media (max-width: 768px){
+  html, body{max-width:100%;overflow-x:hidden}
+  .container{padding:8px 5px 50px !important;max-width:100% !important}
+  body.is-embedded .container{padding:4px 3px 40px !important;max-width:100% !important}
+  .panel{padding:14px 9px !important;min-width:0;overflow:hidden}
+  .brand-title{font-size:14px !important;line-height:1.35;word-break:break-word}
+  .nav-tabs{gap:7px}
+  .nav-tab{font-size:11px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:6px}
+  .sec-title{font-size:14px !important;line-height:1.4;word-break:break-word}
+  .sec-title span{display:block;font-size:10px !important;margin-top:2px}
+  .sec-desc{font-size:11px !important;line-height:1.55;word-break:break-word}
+  .kpi-strip{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px}
+  .kpi-card{min-width:0;overflow:hidden}
+  .kpi-sub{white-space:normal !important;word-break:break-word;line-height:1.4}
+  .sweet-summary-banner{font-size:11px !important;word-break:break-word}
+  .svg-wrap{width:100%;overflow:hidden}
+  .svg-wrap svg{width:100% !important;height:auto;display:block}
+  .strat-grid{grid-template-columns:1fr !important;gap:8px}
+  .strat-cell{min-width:0;padding:10px !important}
+  .strat-name{font-size:12.5px !important;white-space:normal;word-break:break-word}
+  .strat-desc{font-size:10.5px !important;line-height:1.5}
+  .pb-banner,.pb-col{padding:10px !important;min-width:0}
+  .pb-col-p{font-size:11px !important;word-break:break-word}
+  .toolbar{padding:10px 9px !important}
+  .inp,.sel,.btn{min-width:0 !important;font-size:11.5px}
+  .tbl-wrap{max-width:100%}
+  table{font-size:11px !important}
+  th,td{font-size:11px !important;word-break:break-word}
+  .act-cell{min-width:0 !important;font-size:10.5px !important}
+  .pill{font-size:10.5px;padding:4px 9px}
+}
+
 </style>
 </head>
 <body>
