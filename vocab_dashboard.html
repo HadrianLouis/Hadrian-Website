@@ -681,6 +681,57 @@ tbody tr:hover td { background: rgba(255, 255, 255, 0.06); }
 .tile-detail{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border-dim);font-size:11.5px;line-height:1.65;color:var(--txt-dim)}
 .tile-note{font-size:12px;line-height:1.65;color:var(--txt-sec)}
 
+
+/* ==== MOBILE ONLY (<=768px) — appended; no PC rule altered ==== */
+@media (max-width: 768px){
+  html, body{max-width:100%;overflow-x:hidden}
+  .container{padding:12px 10px 40px !important;max-width:100% !important}
+  .topbar{padding:8px 10px !important}
+  .brand{flex-direction:column;align-items:flex-start;gap:6px}
+  .back-btn{font-size:11px;padding:5px 10px}
+  .brand-title{font-size:14px !important;line-height:1.35;word-break:break-word;white-space:normal}
+  .brand-sub{font-size:10.5px !important;line-height:1.5;word-break:break-word}
+  .nav-tabs{gap:6px}
+  .nav-tab{font-size:11px;padding:5px 8px}
+  .kpi-strip{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px}
+  .kpi-card{padding:10px 11px !important;min-width:0;overflow:hidden}
+  .kpi-k{font-size:11px}
+  .kpi-v{font-size:20px}
+  .kpi-sub{font-size:10px !important;white-space:normal !important;word-break:break-word;line-height:1.4}
+  .hero-grid{grid-template-columns:1fr !important;gap:12px}
+  .panel{padding:14px 12px !important;min-width:0;overflow:hidden}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:6px}
+  .sec-title{font-size:14px !important;line-height:1.4;word-break:break-word}
+  .sec-title span{display:block;font-size:10px !important;margin-top:2px}
+  .sec-desc{font-size:11px !important;line-height:1.55;word-break:break-word}
+  .sweet-summary-banner{font-size:11px !important;line-height:1.5;padding:8px 10px !important;word-break:break-word}
+  .svg-wrap{width:100%;overflow:hidden}
+  .svg-wrap svg{width:100% !important;height:auto;display:block}
+  .strat-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px}
+  .strat-cell{padding:10px !important;min-width:0}
+  .strat-name{font-size:12px !important;white-space:normal;word-break:break-word}
+  .strat-desc{font-size:10px !important}
+  .toolbar{flex-direction:column;align-items:stretch;gap:8px}
+  .toolbar > div{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+  .inp,.sel,.btn{min-width:0 !important;flex:1 1 auto;font-size:11.5px}
+  .tile-grid,.tile-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px}
+  .word-tile{padding:10px !important;min-height:0}
+  .tile-w{font-size:15px !important;word-break:break-word}
+  .tile-ph{font-size:10px !important;word-break:break-word}
+  .tile-line{font-size:11px !important;word-break:break-word}
+  .tile-detail{font-size:10px !important;max-height:5.2em;overflow:hidden}
+  .tile-tag{font-size:9.5px;white-space:normal}
+  .tile-pair{flex-direction:column;gap:6px}
+  .tile-pair .half{padding:6px 8px}
+  .tile-pair .half b{font-size:13px}
+  .tile-note{font-size:10.5px !important}
+  .pill-mini{font-size:10px}
+  .pager{font-size:11px}
+  .sub-tabs{gap:6px}
+  .sub-tab{font-size:11px;padding:5px 10px}
+  .pending-box{font-size:11.5px;padding:16px}
+}
+
 </style>
 </head>
 <body>
